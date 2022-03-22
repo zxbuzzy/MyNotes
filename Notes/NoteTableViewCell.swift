@@ -15,5 +15,10 @@ class NoteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    func setUpCell(data: Note) {
+        self.titleLabel.text = data.title
+        self.contentLabel.text = data.description
+    }
 
 }
