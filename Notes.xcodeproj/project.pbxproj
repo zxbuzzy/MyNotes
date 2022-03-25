@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		502EEE1427EDCE1400FF11D4 /* CreateNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502EEE1327EDCE1400FF11D4 /* CreateNotesViewController.swift */; };
 		5082646627EA3D8C00357D8A /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5082646527EA3D8C00357D8A /* NotesTableViewController.swift */; };
 		5082646827EA409B00357D8A /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5082646727EA409B00357D8A /* NoteTableViewCell.swift */; };
 		5082646A27EA431B00357D8A /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5082646927EA431B00357D8A /* NoteModel.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		502EEE1327EDCE1400FF11D4 /* CreateNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotesViewController.swift; sourceTree = "<group>"; };
 		5082646527EA3D8C00357D8A /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		5082646727EA409B00357D8A /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		5082646927EA431B00357D8A /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				5082646527EA3D8C00357D8A /* NotesTableViewController.swift */,
+				502EEE1327EDCE1400FF11D4 /* CreateNotesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -114,6 +117,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50B472DB27E99E3100234D25 /* Build configuration list for PBXNativeTarget "Notes" */;
 			buildPhases = (
+				502EEE1527EDDA9300FF11D4 /* SwiftLint */,
 				50B472C327E99E2E00234D25 /* Sources */,
 				50B472C427E99E2E00234D25 /* Frameworks */,
 				50B472C527E99E2E00234D25 /* Resources */,
@@ -173,6 +177,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		502EEE1527EDDA9300FF11D4 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		50B472C327E99E2E00234D25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -182,6 +207,7 @@
 				50B472CB27E99E2E00234D25 /* AppDelegate.swift in Sources */,
 				50B472CD27E99E2E00234D25 /* SceneDelegate.swift in Sources */,
 				5082646627EA3D8C00357D8A /* NotesTableViewController.swift in Sources */,
+				502EEE1427EDCE1400FF11D4 /* CreateNotesViewController.swift in Sources */,
 				5082646827EA409B00357D8A /* NoteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
