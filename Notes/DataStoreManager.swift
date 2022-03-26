@@ -45,26 +45,17 @@ class DataStoreManager {
         }
     }
 
-    func fetchAllNotes() -> [Note] {
-        let fetchRequest: NSFetchRequest<Note>
-        fetchRequest = Note.fetchRequest()
-        guard let objects = try? viewContext.fetch(fetchRequest) else {
-            fatalError("Can't fetch objects.")
-        }
-        return objects
-    }
-
-    func firstNote() -> Note {
+    // Create note.
+    func createNote(title: String, content: String) -> Note {
         let note = Note(context: viewContext)
-        note.title = "Привет, Мир!"
-        note.content = "Инструкция по работе с заметками."
+        note.title = title
+        note.content = content
 
         do {
             try viewContext.save()
         } catch let error {
             print("Error: \(error)")
         }
-
         return note
     }
 }

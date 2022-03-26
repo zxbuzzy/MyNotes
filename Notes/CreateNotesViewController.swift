@@ -7,13 +7,17 @@
 
 import UIKit
 
-class CreateNotesViewController: UIViewController {
+class CreateNotesViewController: UIViewController, UITextViewDelegate {
+    let dataStoreManager = DataStoreManager()
+    var note: Note?
+
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var descriptionTextField: UITextView!
+    @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentTextView.delegate = self
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateTextView(param:)),
                                                name: UIResponder.keyboardDidShowNotification,
@@ -22,12 +26,13 @@ class CreateNotesViewController: UIViewController {
                                                selector: #selector(updateTextView(param:)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        updateSaveButton()
     }
 
     // MARK: - Work with UITextView
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.descriptionTextField.resignFirstResponder()
+        self.contentTextView.resignFirstResponder()
     }
 
     // Метод, который отслеживает ввод и скроллит UITextView по нажатию на return
@@ -40,13 +45,43 @@ class CreateNotesViewController: UIViewController {
             let keyboardFrame = self.view.convert(rectValue, to: view.window)
 
             if param.name == UIResponder.keyboardWillHideNotification {
-                descriptionTextField.contentInset = UIEdgeInsets.zero
+                contentTextView.contentInset = UIEdgeInsets.zero
             } else {
-                descriptionTextField.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height, right: 0)
-                descriptionTextField.scrollIndicatorInsets = descriptionTextField.contentInset
+                contentTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height, right: 0)
+                contentTextView.scrollIndicatorInsets = contentTextView.contentInset
             }
         }
 
-        descriptionTextField.scrollRangeToVisible(descriptionTextField.selectedRange)
+        contentTextView.scrollRangeToVisible(contentTextView.selectedRange)
+    }
+
+    @IBAction func textChanged(_ sender: UITextField) {
+        updateSaveButton()
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        switch textView {
+        case contentTextView:
+            updateSaveButton()
+        default:
+            break
+        }
+    }
+
+    private func updateSaveButton() {
+        let title = titleTextField.text ?? ""
+        let description = contentTextView.text ?? ""
+
+        saveButton.isEnabled = !title.isEmpty && !description.isEmpty
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard segue.identifier == "saveSegue" else { return }
+
+        let title = titleTextField.text ?? ""
+        let content = contentTextView.text ?? ""
+
+        note = dataStoreManager.createNote(title: title, content: content)
     }
 }

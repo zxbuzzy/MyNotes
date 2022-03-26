@@ -11,7 +11,7 @@ import CoreData
 class NotesTableViewController: UITableViewController {
 
     let dataStoreManager = DataStoreManager()
-    var notes: [Note] = []
+    var notes = [Note]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,17 @@ class NotesTableViewController: UITableViewController {
     }
 
     @IBAction func unwindToNotesVC(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
+        guard unwindSegue.identifier == "saveSegue" else { return }
+        guard let sourceViewController = unwindSegue.source as? CreateNotesViewController
+        else {
+            return
+        }
+        guard let note = sourceViewController.note else { return }
+
+        let newIndexPath = IndexPath(row: notes.count, section: 0)
+        notes.append(note)
+        tableView.insertRows(at: [newIndexPath], with: .fade)
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -44,7 +53,6 @@ class NotesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let notes = dataStoreManager.fetchAllNotes()
         return notes.count
     }
 
@@ -64,8 +72,12 @@ class NotesTableViewController: UITableViewController {
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let note = notes[indexPath.row]
+            dataStoreManager.viewContext.delete(note)
             notes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+
+            dataStoreManager.saveContext()
         }
     }
 
