@@ -125,7 +125,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TIH-r0-Eal">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DT2-h0-Zld"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DT2-h0-Zld">
+                            <connections>
+                                <segue destination="9ai-Zz-th9" kind="unwind" identifier="saveSegue" unwindAction="unwindToNotesVC:" id="knK-XJ-mcF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextField" destination="Ijo-kl-8is" id="Hjm-d8-id5"/>
@@ -134,6 +138,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ue0-h8-STI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="9ai-Zz-th9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1657" y="-327"/>
         </scene>
