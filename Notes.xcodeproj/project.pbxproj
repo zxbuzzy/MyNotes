@@ -19,6 +19,7 @@
 		50E69D0327EF2AE6004B3F9C /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E69D0127EF2AE6004B3F9C /* Note+CoreDataClass.swift */; };
 		50E69D0427EF2AE6004B3F9C /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E69D0227EF2AE6004B3F9C /* Note+CoreDataProperties.swift */; };
 		50E69D2B27EF2D88004B3F9C /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E69D2A27EF2D88004B3F9C /* DataStoreManager.swift */; };
+		50E69D2D27EF44D3004B3F9C /* HelloNote.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50E69D2C27EF44D3004B3F9C /* HelloNote.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		50E69D0127EF2AE6004B3F9C /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		50E69D0227EF2AE6004B3F9C /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		50E69D2A27EF2D88004B3F9C /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
+		50E69D2C27EF44D3004B3F9C /* HelloNote.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = HelloNote.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 		50B472E027E99F4B00234D25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				50E69D2C27EF44D3004B3F9C /* HelloNote.plist */,
 				50E69D0127EF2AE6004B3F9C /* Note+CoreDataClass.swift */,
 				50E69D0227EF2AE6004B3F9C /* Note+CoreDataProperties.swift */,
 				50E69CFE27EF23CB004B3F9C /* Note.xcdatamodeld */,
@@ -189,6 +192,7 @@
 				50B472D727E99E3100234D25 /* LaunchScreen.storyboard in Resources */,
 				50B472D427E99E3100234D25 /* Assets.xcassets in Resources */,
 				50B472D227E99E2E00234D25 /* Main.storyboard in Resources */,
+				50E69D2D27EF44D3004B3F9C /* HelloNote.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

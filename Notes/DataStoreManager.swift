@@ -27,6 +27,10 @@ class DataStoreManager {
         return persistentContainer.viewContext
     }()
 
+    lazy var backgroundContext: NSManagedObjectContext = {
+        return persistentContainer.newBackgroundContext()
+    }()
+
     // MARK: - CRUD
 
     func saveContext () {
@@ -39,6 +43,15 @@ class DataStoreManager {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+
+    func fetchAllNotes() -> [Note] {
+        let fetchRequest: NSFetchRequest<Note>
+        fetchRequest = Note.fetchRequest()
+        guard let objects = try? viewContext.fetch(fetchRequest) else {
+            fatalError("Can't fetch objects.")
+        }
+        return objects
     }
 
     func firstNote() -> Note {
