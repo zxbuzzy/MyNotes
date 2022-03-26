@@ -18,7 +18,7 @@ class NoteTableViewCell: UITableViewCell {
 
     func setUpCell(data: Note) {
         self.titleLabel.text = data.title
-        self.contentLabel.text = data.description
+        self.contentLabel.text = data.content
     }
 
 }

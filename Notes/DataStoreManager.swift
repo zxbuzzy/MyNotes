@@ -8,20 +8,23 @@
 import Foundation
 import CoreData
 
-
 // MARK: - Core Data support
 
 class DataStoreManager {
-    
+
     lazy var persistentContainer: NSPersistentContainer = {
 
         let container = NSPersistentContainer(name: "Note")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
+    }()
+
+    lazy var viewContext: NSManagedObjectContext = {
+        return persistentContainer.viewContext
     }()
 
     // MARK: - CRUD
@@ -37,6 +40,18 @@ class DataStoreManager {
             }
         }
     }
+
+    func firstNote() -> Note {
+        let note = Note(context: viewContext)
+        note.title = "Привет, Мир!"
+        note.content = "Инструкция по работе с заметками."
+
+        do {
+            try viewContext.save()
+        } catch let error {
+            print("Error: \(error)")
+        }
+
+        return note
+    }
 }
-
-

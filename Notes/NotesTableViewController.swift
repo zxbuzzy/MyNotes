@@ -15,6 +15,8 @@ class NotesTableViewController: UITableViewController {
 //        Note(title: "Another one", description: "Hello")
 //    ]
 
+    let dataStoreManager = DataStoreManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem
@@ -23,7 +25,6 @@ class NotesTableViewController: UITableViewController {
     @IBAction func unwindToNotesVC(_ unwindSegue: UIStoryboardSegue) {
         let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
-        print("123")
     }
 
     // MARK: - Table view data source
@@ -43,8 +44,9 @@ class NotesTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as? NoteTableViewCell else {
             fatalError("Can't cast cell")
         }
-//        let data = notes[indexPath.row]
-//        cell.setUpCell(data: data)
+
+        let data = dataStoreManager.firstNote()
+        cell.setUpCell(data: data)
         return cell
     }
 
