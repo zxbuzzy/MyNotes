@@ -10,6 +10,7 @@ import UIKit
 class CreateNotesViewController: UIViewController, UITextViewDelegate {
     let dataStoreManager = DataStoreManager()
     var note: Note?
+    var hasBeenChanged = false
 
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
@@ -17,6 +18,7 @@ class CreateNotesViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateUI()
         contentTextView.delegate = self
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateTextView(param:)),
@@ -75,6 +77,11 @@ class CreateNotesViewController: UIViewController, UITextViewDelegate {
         saveButton.isEnabled = !title.isEmpty && !description.isEmpty
     }
 
+    private func updateUI() {
+        titleTextField.text = note?.title
+        contentTextView.text = note?.content
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard segue.identifier == "saveSegue" else { return }
@@ -82,6 +89,14 @@ class CreateNotesViewController: UIViewController, UITextViewDelegate {
         let title = titleTextField.text ?? ""
         let content = contentTextView.text ?? ""
 
-        note = dataStoreManager.createNote(title: title, content: content)
+        if hasBeenChanged == true {
+            note?.title = title
+            note?.content = content
+            dataStoreManager.saveContext()
+        } else {
+            note = dataStoreManager.createNote(title: title, content: content)
+            hasBeenChanged = false
+        }
     }
+
 }

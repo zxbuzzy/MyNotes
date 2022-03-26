@@ -16,18 +16,14 @@ class NotesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
-
-        do {
-            notes = try dataStoreManager.viewContext.fetch(fetchRequest)
-        } catch {
-            print(error.localizedDescription)
-        }
+        notes = dataStoreManager.getNotes()
+        self.tableView.reloadData()
     }
 
     @IBAction func unwindToNotesVC(_ unwindSegue: UIStoryboardSegue) {
@@ -36,12 +32,21 @@ class NotesTableViewController: UITableViewController {
         else {
             return
         }
-        guard let note = sourceViewController.note else { return }
-
-        let newIndexPath = IndexPath(row: notes.count, section: 0)
-        notes.append(note)
-        tableView.insertRows(at: [newIndexPath], with: .fade)
+        guard let updateNote = sourceViewController.note else { return }
+        
+        notes = dataStoreManager.getNotes()
         self.tableView.reloadData()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard segue.identifier == "updateNote" else { return }
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let note = notes[indexPath.row]
+        guard let newCreateNoteVC = segue.destination as? CreateNotesViewController else { return }
+        newCreateNoteVC.note = note
+        newCreateNoteVC.title = "Update"
+        newCreateNoteVC.hasBeenChanged = true
     }
 
     // MARK: - Table view data source

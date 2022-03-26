@@ -52,6 +52,7 @@
                                 <connections>
                                     <outlet property="contentLabel" destination="UM9-w5-3Lj" id="zfm-Q6-nr4"/>
                                     <outlet property="titleLabel" destination="7NZ-qC-eHW" id="wXZ-sI-2ZC"/>
+                                    <segue destination="wwC-Pw-B6w" kind="show" identifier="updateNote" id="BYR-bm-bpI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -161,6 +162,9 @@
             <point key="canvasLocation" x="-88" y="-327"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BYR-bm-bpI"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

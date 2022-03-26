@@ -58,4 +58,20 @@ class DataStoreManager {
         }
         return note
     }
+    // Get notes.
+    func getNotes() -> [Note] {
+        var notes: [Note] = []
+        let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
+
+        do {
+            notes = try viewContext.fetch(fetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+        return notes
+    }
+
+    func updateNote(idx: Int, title: String, content: String) {
+        
+    }
 }
