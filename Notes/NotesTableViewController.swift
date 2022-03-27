@@ -28,12 +28,10 @@ class NotesTableViewController: UITableViewController {
 
     @IBAction func unwindToNotesVC(_ unwindSegue: UIStoryboardSegue) {
         guard unwindSegue.identifier == "saveSegue" else { return }
-        guard let sourceViewController = unwindSegue.source as? CreateNotesViewController
+        guard unwindSegue.source is CreateNotesViewController
         else {
             return
         }
-        guard let updateNote = sourceViewController.note else { return }
-        
         notes = dataStoreManager.getNotes()
         self.tableView.reloadData()
     }

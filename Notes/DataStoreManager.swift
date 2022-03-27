@@ -70,8 +70,4 @@ class DataStoreManager {
         }
         return notes
     }
-
-    func updateNote(idx: Int, title: String, content: String) {
-        
-    }
 }
